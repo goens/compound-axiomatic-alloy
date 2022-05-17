@@ -640,9 +640,12 @@ Lemma A_Event : forall _i x,
   sw__A _i x ->
   sw__Event _i x.
 Proof.
+  Admitted.
+  (*
   intros _i x X.  destruct X as [[[[X|X]|X]|X]|X];
   apply join12_r1_r2 in X; destruct X as [o [O X]]; domain x.
 Qed.
+  *)
 Hint Resolve A_Event.
 
 Lemma lone_ord : forall _i x o1 o2,
@@ -650,11 +653,14 @@ Lemma lone_ord : forall _i x o1 o2,
   -> o2 --(sw__ord _i)--> x
   -> o1 = o2.
 Proof.
+  (*
   intros _i x o1 o2 X1 X2.  apply transpose_pair in X1; apply transpose_pair in X2.
   assert_conclusion (_sw__Event__memory_order_range _i (singleton_atom x)) R.
     oneof_auto.
   apply R; apply r2_join12; auto.
 Qed.
+*)
+  Admitted.
 
 Lemma map_singleton : forall _i x x',
   x --(sw__Event__map _i)--> x'
@@ -1020,6 +1026,7 @@ Lemma low_release : forall _i x x',
   -> x --(sw__Event__map _i)--> x'
   -> sw__MemoryEvent _i x
   -> hw__Release _i x'.
+(*
 Proof.
   intros _i x x' COMPILE X XM X'.
   assert (sw__Event _i x) as XE by (domain x).
@@ -1058,6 +1065,8 @@ Proof.
   Case "Fence".
     contradiction_types.
 Qed.
+*)
+  Admitted.
 
 Lemma low_rel_fence : forall _i x x',
   compile_src11_ptx _i
@@ -1092,6 +1101,7 @@ Lemma fsb_sbloc_prefix : forall _i x y z,
   -> sw__Write _i z
   -> x --((sw__Event__map _i; hw__prefix _i; tr (sw__Event__map _i)))--> z.
 Proof.
+  (*
   intros _i x y z COMPILE X XY YZ ZW.
   destruct XY as [XY|XY].
   Case "x=y".
@@ -1146,7 +1156,8 @@ Proof.
     SCase "Write".
       apply low_write_write with z; auto.
 Qed.
-
+*)
+  Admitted.
 Lemma rf_map : forall _i x y,
   compile_src11_ptx _i
   -> x --(sw__Write__rf _i)--> y
@@ -1698,6 +1709,7 @@ Lemma low_acquire : forall _i x x',
   -> sw__MemoryEvent _i x
   -> hw__Acquire _i x'.
 Proof.
+  (*
   intros _i x x' COMPILE X XM X'.
   assert (sw__Event _i x) as XE by (domain x).
   apply _sw__Event_abstract in XE.  destruct XE as [XE|XE].
@@ -1734,7 +1746,8 @@ Proof.
   Case "Fence".
     contradiction_types.
 Qed.
-
+*)
+  Admitted.
 Lemma sbf_map : forall _i x y,
   compile_src11_ptx _i
   -> util__optional _i (sw__Event__sb _i; util__ident _i (sw__Fence _i)) (x, y)
@@ -1742,6 +1755,7 @@ Lemma sbf_map : forall _i x y,
   -> sw__Read _i x
   -> x --((sw__Event__map _i; hw__suffix _i; tr (sw__Event__map _i)))--> y.
 Proof.
+  (*
   intros _i x y COMPILE XY Y XR.
   destruct XY as [XY|XY].
   Case "x=y".
@@ -1766,7 +1780,8 @@ Proof.
     SCase "FenceAcqs".
       apply low_acq_fence with y; auto.
 Qed.
-
+*)
+  Admitted.
 Lemma rs_range_A : forall _i x y,
      intersect (sw__Write _i) (sw__A _i) x
   -> rtc (sw__strong _i (sw__Write__rf _i); sw__Read__rmw _i) (x, y)
@@ -1822,6 +1837,7 @@ Lemma low_releaser : forall _i x x',
   -> x --(sw__Event__map _i)--> x'
   -> hw__Releasers _i x'.
 Proof.
+  (*
   intros _i x x1' COMPILE X X'.
   assert (sw__A _i x) as X_A by (auto_cases X).
   assert (sw__Event _i x) as X_E by (destructs X_A).
@@ -1874,6 +1890,8 @@ Proof.
       apply _hw__FenceAcqRel_subsig_hw__FenceSC.
       apply C.  apply r1_r2_join12 with x; auto.  split; auto.
 Qed.
+*)
+  Admitted.
 
 Lemma low_acquirer : forall _i x x',
   compile_src11_ptx _i
@@ -1881,6 +1899,7 @@ Lemma low_acquirer : forall _i x x',
   -> x --(sw__Event__map _i)--> x'
   -> hw__Acquirers _i x'.
 Proof.
+  (*
   intros _i x x1' COMPILE X X'.
   assert (sw__A _i x) as X_A by (auto_cases X).
   assert (sw__Event _i x) as X_E by (destructs X_A).
@@ -1934,7 +1953,8 @@ Proof.
       apply _hw__FenceAcqRel_subsig_hw__FenceSC.
       apply C.  apply r1_r2_join12 with x; auto.  split; auto.
 Qed.
-
+*)
+  Admitted.
 Lemma rf_rmw_rf_obs : forall _i e f h,
   compile_src11_ptx _i ->
   intersect (sw__Write _i) (sw__A _i) e ->
@@ -2459,6 +2479,7 @@ Lemma co_left_or_right : forall _i x' y',
   -> x' --(hw__MemoryEvent__address _i; tr (hw__MemoryEvent__address _i))--> y'
   -> x' = y' \/ tc (hw__Write__co _i) (x', y') \/ tc (hw__Write__co _i) (y', x').
 Proof.
+  (*
   intros _i x' y' X' Y' STRONG ADDR.
   split_1 ADDR XA a YA.  apply transpose_pair in YA.
   assert_conclusion (strong_scope _i x' y' a) SCOPE.
@@ -2492,6 +2513,8 @@ Proof.
     left; apply arrow_112; unfold_iden.
   destruct CO5 as [CO5|CO5]; lr.  apply tc_transpose in CO5; lr.
 Qed.
+*)
+  Admitted.
 
 Lemma strong_symmetric : forall _i x y,
   hw__strong_r _i (x, y)
@@ -3027,6 +3050,7 @@ Lemma sw_range : forall _i x y,
      x --(sw__sw _i)--> y
   -> sw__Read _i y \/ sw__Fence _i y.
 Proof.
+  (*
   intros _i x y XY.
   split_1 XY XA a AY.  repeat unfold_iden.  clear XA.
   assert (sw__Event _i y) as Y by (
@@ -3042,6 +3066,8 @@ Proof.
       apply transpose_pair, r2_join12, Y_MO in AY;
       destruct AY as [[AY|AY]|AY]; contradiction_types.
 Qed.
+*)
+  Admitted.
 
 Lemma hb_write : forall _i x y,
      x --(sw__hb _i)--> y
@@ -3176,6 +3202,7 @@ Lemma com_unlowering : forall _i x' y',
   -> x' --(hw__com _i)--> y'
   -> x' --(tr (sw__Event__map _i); sw__com _i; sw__Event__map _i)--> y'.
 Proof.
+
   intros _i x' y' COMPILE XY'.
   assert (hw__MemoryEvent _i x') as X_E by (destruct XY' as [[RF|CO]|FR]; domain x').
   assert (hw__MemoryEvent _i y') as Y_E.
@@ -3316,6 +3343,7 @@ Lemma only_fence_sc : forall _i x,
   sw__SC _i x
   -> sw__Fence _i x.
 Proof.
+  (*
   intros _i x X.
   assert (sw__Event _i x) as X_E.
     apply join12_r1_r2 in X.  destruct X as [o [O X_O]].
@@ -3333,6 +3361,8 @@ Proof.
     apply untranspose_pair, r2_join12, X_MO in X.
     destruct X as [[X|X]|X]; contradiction_types.
 Qed.
+*)
+  Admitted.
 
 Lemma efhb_fhb : forall _i x y,
   x --(util__ident _i (sw__SC _i)
