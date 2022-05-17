@@ -4,8 +4,11 @@ fun symmetric[r: univ->univ] : univ->univ { r & ~r }
 fun optional[f: univ->univ] : univ->univ  { iden + f }
 pred irreflexive[rel: univ->univ]         { no iden & rel }
 pred acyclic[rel: univ->univ]             { irreflexive[^rel] }
+fun inverse_iden[bag: univ] : bag -> bag {
+ (bag -> bag) - (bag <: iden)
+}
 pred total[rel: univ->univ, bag: univ] {
-  all disj e, e': bag | e->e' + e'->e in ^rel + ^~rel
+  inverse_iden[bag] in ^rel + ^~rel
   acyclic[rel]
 }
 
