@@ -47,6 +47,7 @@ fact com_addr { co + rf + fr in address.~address }
 fact po_acyclic { acyclic[po] }
 fact some_thread { all e: Event | one t: Thread | t->e in start.*po }
 fun po_loc : Event->Event { ^po & address.~address }
+fact po_partial {strict_partial[po]}
 
 
 //ppo
@@ -74,11 +75,22 @@ fact events_system_scope { Event.scope = System }
 //fence
 fun mfence : MemoryEvent->MemoryEvent { (po & MemoryEvent->Fence).po }
 
+// co is total
+fact co_per_loc {
+  	all a: Address |
+    	total[co, (a.~address & Write)]
+}
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // =TSO=
 
 pred location_sc { acyclic[rf + co + fr + po_loc] }
 pred causality   { acyclic[rfe + co + fr + ppo + mfence] }
+
+pred tso_mm {
+	location_sc
+	causality
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // =Auxiliaries=
@@ -95,5 +107,4 @@ fun typed[rel: Event->Event, type: Event] : Event->Event {
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-pred emptypred {}
-run emptypred for 4
+run tso_mm for 4
