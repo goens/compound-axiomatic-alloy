@@ -19,3 +19,6 @@ pred strict_partial[rel: univ->univ] {
   irreflexive[rel]
   transitive[rel]
 }
+
+fun dom[rel : univ -> univ ] :  univ { univ.~rel }
+fun codom[rel : univ -> univ]:  univ { univ.rel }
