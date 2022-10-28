@@ -103,7 +103,7 @@ pred no_thin_air { acyclic[rf + dep + ppo] }
 pred cordECO { irreflexive[cord.(Event <: optional[eco]:> Event)] }
 
 
-pred ptx_mm {
+pred cmm_mm {
   no_thin_air and sc_per_sc and atomicity and coherence
   and causality and fenceSC and cordECO
 }
@@ -204,8 +204,8 @@ fun gsc : Event -> Event { gsc_x86Read + gsc_mfence + gsc_ptxFence}
 fun FenceRels : Fence { ptxFenceAcqRel + ptxFenceRel + BarrierWait }
 fun FenceAcqs : Fence { ptxFenceAcqRel + ptxFenceAcq + BarrierWait }
 
-sig Acquire extends Read { } { scope not in Thread }
-sig Release extends Write { } { scope not in Thread }
+sig Acquire extends ptxRead { } { scope not in Thread }
+sig Release extends ptxWrite { } { scope not in Thread }
 
 //writes
 fact co_per_scope {
