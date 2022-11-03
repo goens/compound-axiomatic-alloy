@@ -196,7 +196,7 @@ sig ptxFenceSC extends ptxFenceAcqRel {
 
 fun SCLike : set Event { mFence + x86Read + ptxFenceSC }
 
-fun gsc : Event -> Event { gsc_x86Read + gsc_mfence + gsc_ptxFence}
+fun gsc : Event -> Event { (gsc_x86Read + gsc_mfence + gsc_ptxFence) - (x86MemoryEvent -> x86MemoryEvent)}
 
 
 
@@ -238,7 +238,7 @@ fact { is_strong[synchronizes] }
 //fence
 fact wf_gsc {
   //all s: Scope | total[sc, scoped[s] & inside[s] & FenceSC]
-  all disj f1, f2 : SCLike | f1->f2 in strong_r => (f1->f2 in gsc or f2->f1 in gsc)
+  all disj f1, f2 : SCLike | f1->f2 in strong_r  => (f1->f2 in gsc or f2->f1 in gsc or f1->f2 in x86MemoryEvent -> x86MemoryEvent)
   gsc in typed[strong_r, SCLike]
   acyclic[gsc]
   gsc = SCLike <: gsc :> SCLike
