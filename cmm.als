@@ -40,9 +40,10 @@ sig Write extends MemoryEvent {
 }
 
 sig x86Read extends Read { 
-  gsc_x86Read : set Event, 
-  ppo : set Event,
+  gsc_x86Read : set Event,
 }
+
+fun ppo : MemoryEvent->MemoryEvent { (x86Read->x86Read + x86Write->x86Write + x86Read->x86Write) & po }
 
 sig x86Write extends Write { }
 
