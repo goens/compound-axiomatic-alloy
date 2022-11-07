@@ -1,0 +1,46 @@
+From 389b1ddedc119a1d24ce036071be9647edd290e0 Mon Sep 17 00:00:00 2001
+From: Andres Goens <andres.goens@ed.ac.uk>
+Date: Mon, 7 Nov 2022 18:02:28 +0000
+Subject: [PATCH] hack CLI to just run file and tell me if its sat/unsat
+
+---
+ .../main/java/org/alloytools/alloy/cli/CLI.java   | 15 ++++++++-------
+ 1 file changed, 8 insertions(+), 7 deletions(-)
+
+diff --git a/org.alloytools.alloy.cli/src/main/java/org/alloytools/alloy/cli/CLI.java b/org.alloytools.alloy.cli/src/main/java/org/alloytools/alloy/cli/CLI.java
+index d141dca..c6e92e4 100644
+--- a/org.alloytools.alloy.cli/src/main/java/org/alloytools/alloy/cli/CLI.java
++++ b/org.alloytools.alloy.cli/src/main/java/org/alloytools/alloy/cli/CLI.java
+@@ -221,7 +221,7 @@ public class CLI extends Env {
+ 		String filename = options._arguments().remove(0);
+ 		Map<String, String> cache = new HashMap<>();
+ 		Module world = CompUtil.parseEverything_fromFile(rep, cache, filename);
+-		Expr e = world.parseOneExpressionFromString("# Foo");
++		//Expr e = world.parseOneExpressionFromString("# Foo");
+ 
+ 		for (Command c : world.getAllCommands()) {
+ 			System.out.println("Command " + c);
+@@ -231,13 +231,14 @@ public class CLI extends Env {
+ 			int n = 0;
+ 
+ 			while (s.satisfiable()) {
+-				System.out.println(e + " = " + s.eval(e));
++				//System.out.println(e + " = " + s.eval(e));
+ 				System.out.println(s);
+-				if (s.isIncremental()) {
+-					s = s.next();
+-				} else
+-					break;
+-				n++;
++				break;
++				//if (s.isIncremental()) {
++				//	s = s.next();
++				//} else
++				//	break;
++				//n++;
+ 			}
+ 		}
+ 
+-- 
+2.32.0 (Apple Git-132)
+
