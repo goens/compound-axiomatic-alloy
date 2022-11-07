@@ -2,7 +2,7 @@ test,expected,result
 IRIW_one_tso_read_fence_rest_ptx.als,✓,INSTANCE
 IRIW_one_tso_read_fence_rest_ptx_rlx.als,✓,INSTANCE
 IRIW_ptx.als,✓,INSTANCE
-IRIW_ptx_fences.als,𐄂,INSTANCE
+IRIW_ptx_fences.als,𐄂,UNSAT
 IRIW_ptx_reads_tso_writes.als,✓,INSTANCE
 IRIW_ptx_reads_tso_writes_fences.als,𐄂,UNSAT
 IRIW_tso.als,𐄂,UNSAT
@@ -35,14 +35,14 @@ MP_writes_tso_ptx_acq_sys.als,𐄂,UNSAT
 MP_writes_tso_ptx_acq_sys_fence.als,𐄂,UNSAT
 PTX_IRIW.als,✓,INSTANCE
 PTX_IRIW_2ctas.als,✓,INSTANCE
-PTX_IRIW_3ctas.als,𐄂,INSTANCE
+PTX_IRIW_3ctas.als,𐄂,UNSAT
 PTX_IRIW_3ctas_1scoped_r.als,✓,INSTANCE
 PTX_IRIW_3ctas_1scoped_w.als,✓,INSTANCE
 PTX_IRIW_3ctas_scoped_rs_after.als,𐄂,INSTANCE
 PTX_IRIW_4ctas.als,✓,INSTANCE
 PTX_IRIW_acq_fences.als,✓,INSTANCE
 PTX_IRIW_acqrel_fences.als,✓,INSTANCE
-PTX_IRIW_fences.als,𐄂,INSTANCE
+PTX_IRIW_fences.als,𐄂,UNSAT
 PTX_IRIW_relacq.als,✓,INSTANCE
 PTX_IRIW_sc_acqrel_fence.als,✓,INSTANCE
 PTX_MP.als,✓,INSTANCE
@@ -95,7 +95,7 @@ PTX_dekkers.als,✓,INSTANCE
 PTX_dekkers_acqfence.als,✓,INSTANCE
 PTX_dekkers_acqrel.als,✓,INSTANCE
 PTX_dekkers_acqrelfence.als,✓,INSTANCE
-PTX_dekkers_fence.als,𐄂,INSTANCE
+PTX_dekkers_fence.als,𐄂,UNSAT
 PTX_dekkers_relfence.als,✓,INSTANCE
 PTX_simpleRF.als,✓,INSTANCE
 PTX_simple_write_serialization.als,𐄂,UNSAT
@@ -120,7 +120,7 @@ dekkers_mix_only_cta_fence.als,✓,INSTANCE
 dekkers_mix_only_ptx_fence.als,✓,INSTANCE
 dekkers_mix_only_tso_fence.als,✓,INSTANCE
 dekkers_ptx.als,✓,INSTANCE
-dekkers_ptx_fence.als,𐄂,INSTANCE
+dekkers_ptx_fence.als,𐄂,UNSAT
 dekkers_tso.als,✓,INSTANCE
 dekkers_tso_fence.als,𐄂,UNSAT
 dekkers_tso_ptx_dont_care.als,✓,INSTANCE
