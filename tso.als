@@ -47,7 +47,6 @@ fact com_addr { co + rf + fr in address.~address }
 fact po_acyclic { acyclic[po] }
 fact some_thread { all e: Event | one t: Thread | t->e in start.*po }
 fun po_loc : Event->Event { ^po & address.~address }
-fact po_partial {strict_partial[po]}
 
 
 //ppo
