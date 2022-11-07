@@ -101,7 +101,7 @@ pred causality   { irreflexive[optional[fr + rf].cord] }
 pred atomicity   { no strong[fr].(strong[co]) & rmw }
 pred sc_per_sc { acyclic[strong[com] + po_loc] }
 pred no_thin_air { acyclic[rf + dep + ppo] }
-pred cordECO { irreflexive[cord.(Event <: optional[eco]:> Event)] }
+pred cordECO { irreflexive[cord.(Event <: optional[eco & strong_r]:> Event)] }
 
 
 pred cmm_mm {
