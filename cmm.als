@@ -97,11 +97,11 @@ fact subscope_acyclic { acyclic[subscope] }
 
 pred coherence   { location[Write <: cord :> Write] in ^co }
 pred fenceSC { acyclic[gsc + cord] }
-pred causality   { irreflexive[optional[fr + rf].cord] }
+pred causality   { irreflexive[optional[fr + (rf - (x86Event <: rfi :> x86Event))].cord] }
 pred atomicity   { no strong[fr].(strong[co]) & rmw }
 pred sc_per_sc { acyclic[strong[com] + po_loc] }
 pred no_thin_air { acyclic[rf + dep + ppo] }
-pred cordECO { irreflexive[cord.(Event <: optional[eco & strong_r]:> Event)] }
+pred cordECO { irreflexive[cord.(Event <: optional[(eco - (x86Event <: rfi :> x86Event)) & strong_r]:> Event)] }
 
 
 pred cmm_mm {
@@ -137,7 +137,7 @@ fun xgAcquirers : Event          { Acquirers + x86Read + mFence } // may be mFen
 
 
 fun xgsync[head: Event, tail: Event] : Event->Event {
-  head <: strong[gprel.^observation.gpacq] - (x86Event <: po :> x86Event) :> tail
+  head <: strong[gprel.^observation.gpacq] - (x86Event <: ^po :> x86Event) :> tail
 }
 fun xg_cause_base : Event->Event  {
   ^(*po.(sc + xgsync[xgReleasers,xgAcquirers]).*po)
@@ -157,9 +157,9 @@ fun xhb : Event -> Event { typed[^(rfe + co + fr + ppo + implid), x86Event] }
 
 fun gxhb : Event -> Event { optional[(ptxWrite <: rfe :> x86Read)]. xhb }
 
-fun cord : Event -> Event { typed[^(gxhb + xgcause + gsc), Event]}
+fun cord : Event -> Event { typed[^(gxhb + xgcause + gsc), Event] }
 
-fun eco : Event -> Event { ^com }
+fun eco : Event -> Event { ^ (^co + fr + (rf - (x86Event <: rfi :> x86Event)))}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
