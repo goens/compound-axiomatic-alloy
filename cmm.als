@@ -157,9 +157,9 @@ fun xhb : Event -> Event { typed[^(rfe + co + fr + ppo + implid), x86Event] }
 
 fun gxhb : Event -> Event { optional[(ptxWrite <: rfe :> x86Read)]. xhb }
 
-fun cord : Event -> Event { typed[^(gxhb + xgcause + gsc), Event] }
+fun cord : Event -> Event { typed[^(gxhb + xgcause + gsc) & strong_r, Event] }
 
-fun eco : Event -> Event { ^ (^co + fr + (rf - (x86Event <: rfi :> x86Event)))}
+fun eco : Event -> Event { ^ (strong_r & (^co + fr + (rf - (x86Event <: rfi :> x86Event))))}
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
