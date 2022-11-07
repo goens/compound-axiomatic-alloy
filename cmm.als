@@ -140,7 +140,7 @@ fun xgsync[head: Event, tail: Event] : Event->Event {
   head <: strong[gprel.^observation.gpacq] :> tail
 }
 fun xg_cause_base : Event->Event  {
-  ^(*po.(gsc + xgsync[xgReleasers,xgAcquirers]).*po)
+  ^(*po.(sc + xgsync[xgReleasers,xgAcquirers]).*po)
 }
 fun xgcause : Event->Event {
   xg_cause_base + (observation.(po_loc + xg_cause_base))
@@ -155,9 +155,9 @@ fun implid : Event-> Event { x86Event <:po:> (dom[rmw]+codom[rmw]+mFence) +  (do
 
 fun xhb : Event -> Event { typed[^(rfe + co + fr + ppo + implid), x86Event] }
 
-fun gxhb : Event -> Event { (ptxWrite <: optional[rfe] :> x86Read).xhb }
+fun gxhb : Event -> Event { optional[(ptxWrite <: rfe :> x86Read)]. xhb }
 
-fun cord : Event -> Event { typed[^(gxhb + xgcause), Event]}
+fun cord : Event -> Event { typed[^(gxhb + xgcause + gsc), Event]}
 
 fun eco : Event -> Event { ^com }
 
@@ -197,7 +197,7 @@ sig ptxFenceSC extends ptxFenceAcqRel {
 
 fun SCLike : set Event { mFence + x86Read + ptxFenceSC }
 
-fun gsc : Event -> Event { (gsc_x86Read + gsc_mfence + gsc_ptxFence) - (x86MemoryEvent -> x86MemoryEvent)}
+fun gsc : Event -> Event { (gsc_x86Read + gsc_mfence + gsc_ptxFence) }
 
 
 
