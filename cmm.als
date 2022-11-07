@@ -58,7 +58,7 @@ sig mFence extends Fence {
 } 
 
 sig ptxFence extends Fence { 
- gsc_ptxFence : set Event, 
+// gsc_ptxFence : set Event, 
 }
 
 
@@ -192,12 +192,15 @@ sig ptxFenceRel extends ptxFence { }
 sig ptxFenceAcqRel extends ptxFence { }
 
 sig ptxFenceSC extends ptxFenceAcqRel {
-   sc: set ptxFenceSC,
+ //  sc: set ptxFenceSC,
+   gsc_ptxFence : set Event, 
 }
 
 fun SCLike : set Event { mFence + x86Read + ptxFenceSC }
 
 fun gsc : Event -> Event { (gsc_x86Read + gsc_mfence + gsc_ptxFence) }
+
+fun sc: Event -> Event { gsc_ptxFence:>ptxFenceSC }
 
 
 
