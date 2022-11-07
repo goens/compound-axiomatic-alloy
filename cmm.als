@@ -137,7 +137,7 @@ fun xgAcquirers : Event          { Acquirers + x86Read + mFence } // may be mFen
 
 
 fun xgsync[head: Event, tail: Event] : Event->Event {
-  head <: strong[gprel.^observation.gpacq] :> tail
+  head <: strong[gprel.^observation.gpacq] - (x86Event <: po :> x86Event) :> tail
 }
 fun xg_cause_base : Event->Event  {
   ^(*po.(sc + xgsync[xgReleasers,xgAcquirers]).*po)
