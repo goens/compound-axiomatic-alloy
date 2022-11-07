@@ -1,4 +1,5 @@
 // Litmus: MP3_fences_rel
+// Expected: ✓
 module litmus
 open ptx as ptx
 pred generated_litmus_test {

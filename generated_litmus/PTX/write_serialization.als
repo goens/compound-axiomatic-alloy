@@ -1,4 +1,5 @@
 // Litmus: write_serialization
+// Expected: ✓
 module litmus
 open ptx as ptx
 pred generated_litmus_test {

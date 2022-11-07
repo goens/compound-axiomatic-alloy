@@ -1,4 +1,5 @@
 // Litmus: IRIW_relacq
+// Expected: ✓
 module litmus
 open ptx as ptx
 pred generated_litmus_test {

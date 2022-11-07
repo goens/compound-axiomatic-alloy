@@ -1,8 +1,9 @@
 // Litmus: N7
+// Expected: ✓
 module litmus
 open tso as tso
 pred generated_litmus_test {
-  # tso/Thread = 2
+  # tso/Thread = 3
   # tso/Read = 4
   # tso/Write = 2
   # tso/Fence = 0
@@ -10,6 +11,7 @@ pred generated_litmus_test {
   some
     t0 : tso/Thread,
     t1 : tso/Thread,
+    t2 : tso/Thread,
     r0 : tso/Read,
     r1 : tso/Read,
     r2 : tso/Read,
@@ -23,7 +25,8 @@ pred generated_litmus_test {
     r0.po = r1 and
     t0 != t1 and
     t1.start = w1 and
-    w1.po = r2 and
+    t1 != t2 and
+    t2.start = r2 and
     r2.po = r3 and
 
     // Addresses 

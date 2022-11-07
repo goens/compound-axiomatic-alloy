@@ -1,4 +1,5 @@
 // Litmus: WRC_rel_mid
+// Expected: 𐄂
 module litmus
 open ptx as ptx
 pred generated_litmus_test {

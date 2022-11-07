@@ -16,7 +16,7 @@ pred generated_litmus_test {
     r2 : ptx/Read - ptx/Acquire,
     w0 : ptx/Write - ptx/Release,
     w1 : ptx/Write - ptx/Release,
-    f0 : ptx/FenceRel,
+    f0 : ptx/FenceAcqRel,
     f1 : ptx/FenceAcq |
 
     // Program Order

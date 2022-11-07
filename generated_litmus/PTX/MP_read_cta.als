@@ -1,4 +1,5 @@
 // Litmus: MP_read_cta
+// Expected: 𐄂
 module litmus
 open ptx as ptx
 pred generated_litmus_test {

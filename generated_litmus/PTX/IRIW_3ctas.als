@@ -1,4 +1,5 @@
 // Litmus: IRIW_3ctas
+// Expected: 𐄂
 module litmus
 open ptx as ptx
 pred generated_litmus_test {

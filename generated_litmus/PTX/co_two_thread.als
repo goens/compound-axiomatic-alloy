@@ -1,4 +1,5 @@
 // Litmus: co_two_thread
+// Expected: 𐄂
 module litmus
 open ptx as ptx
 pred generated_litmus_test {

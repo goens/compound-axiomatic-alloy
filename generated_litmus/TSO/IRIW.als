@@ -1,4 +1,5 @@
 // Litmus: IRIW
+// Expected: 𐄂
 module litmus
 open tso as tso
 pred generated_litmus_test {

@@ -1,4 +1,5 @@
 // Litmus: three_vars_ws
+// Expected: ✓
 module litmus
 open ptx as ptx
 pred generated_litmus_test {

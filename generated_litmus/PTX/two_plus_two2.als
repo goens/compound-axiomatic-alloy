@@ -1,4 +1,5 @@
 // Litmus: two_plus_two2
+// Expected: ✓
 module litmus
 open ptx as ptx
 pred generated_litmus_test {

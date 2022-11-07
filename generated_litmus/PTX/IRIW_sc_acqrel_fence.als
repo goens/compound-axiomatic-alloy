@@ -1,4 +1,5 @@
 // Litmus: IRIW_sc_acqrel_fence
+// Expected: ✓
 module litmus
 open ptx as ptx
 pred generated_litmus_test {
