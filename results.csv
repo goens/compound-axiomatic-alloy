@@ -1,6 +1,6 @@
 test,expected,result
-IRIW_one_tso_read_fence_rest_ptx.als,✓,INSTANCE
-IRIW_one_tso_read_fence_rest_ptx_rlx.als,✓,INSTANCE
+IRIW_one_tso_read_fence_rest_ptx.als,𐄂,UNSAT
+IRIW_one_tso_read_fence_rest_ptx_rlx.als,𐄂,UNSAT
 IRIW_ptx.als,✓,INSTANCE
 IRIW_ptx_fences.als,𐄂,UNSAT
 IRIW_ptx_reads_tso_writes.als,✓,INSTANCE
@@ -9,7 +9,7 @@ IRIW_tso.als,𐄂,UNSAT
 IRIW_tso_fence_left_ptx_right_fenceacqrel.als,✓,INSTANCE
 IRIW_tso_fences.als,𐄂,UNSAT
 IRIW_tso_left_ptx_right.als,✓,INSTANCE
-IRIW_tso_left_ptx_right_fence.als,𐄂,INSTANCE
+IRIW_tso_left_ptx_right_fence.als,𐄂,UNSAT
 IRIW_tso_left_ptx_right_fenceacqrel.als,✓,INSTANCE
 IRIW_tso_one_read_ptx_writes.als,✓,INSTANCE
 IRIW_tso_reads_ptx_writes.als,𐄂,UNSAT
@@ -115,7 +115,7 @@ WRC_ptx_reader_acq.als,𐄂,UNSAT
 WRC_ptx_reader_dep.als,✓,INSTANCE
 cmm.als,,INSTANCE
 dekkers_mix.als,✓,INSTANCE
-dekkers_mix_fence.als,𐄂,INSTANCE
+dekkers_mix_fence.als,𐄂,UNSAT
 dekkers_mix_only_cta_fence.als,✓,INSTANCE
 dekkers_mix_only_ptx_fence.als,✓,INSTANCE
 dekkers_mix_only_tso_fence.als,✓,INSTANCE

@@ -1,5 +1,5 @@
 // Litmus: IRIW_one_tso_read_fence_rest_ptx_rlx
-// Expected: ✓
+// Expected: 𐄂
 module litmus
 open cmm as cmm
 pred generated_litmus_test {
