@@ -97,7 +97,7 @@ fact subscope_acyclic { acyclic[subscope] }
 
 pred coherence   { location[Write <: cord :> Write] in ^co }
 pred fenceSC { acyclic[gsc + cord] }
-pred causality   { irreflexive[optional[fr + (rf - (x86Event <: rfi :> x86Event))].cord] }
+pred causality   { irreflexive[optional[fr + (rf - (x86Event <: rfi :> x86Event))].wcord] }
 pred atomicity   { no strong[fr].(strong[co]) & rmw }
 pred sc_per_sc { acyclic[strong[com] + po_loc] }
 pred no_thin_air { acyclic[rf + dep + ppo] }
@@ -158,6 +158,9 @@ fun xhb : Event -> Event { typed[^(rfe + co + fr + ppo + implid), x86Event] }
 fun gxhb : Event -> Event { optional[(ptxWrite <: rfe :> x86Read)]. xhb }
 
 fun cord : Event -> Event { typed[^(gxhb + xgcause + (optional[(ptxEvent <: ^po :>ptxEvent)]).gsc.(optional[(ptxEvent <: ^po :>ptxEvent)])) & strong_r, Event] }
+
+fun wcord : Event -> Event { typed[^(gxhb + xgcause + (optional[(ptxEvent <: ^po :>ptxEvent)]).gsc.(optional[(ptxEvent <: ^po :>ptxEvent)])), Event] }
+
 
 fun eco : Event -> Event { ^ (strong_r & (^co + fr + (rf - (x86Event <: rfi :> x86Event))))}
 
